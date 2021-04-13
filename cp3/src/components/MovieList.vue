@@ -2,17 +2,17 @@
   <div class="wrapper">
     <div class="movies">
       <div class="movie" v-for="movie in movies" :key="movie.id">
+        <div class="image">
+          <img :src="require(`@/assets/Movies/${movie.image}`)" />
+        </div>
         <div class="info">
-          <h1>{{ movie.name }}</h1>
-          <h2>{{ movie.rating }}</h2>
+          <h1>{{ movie.rating }}</h1>
+          <h2>{{ movie.year }}</h2>
           <p>{{ movie.genre }}</p>
         </div>
-        <div class="image">
-          <img :src="'/Images/Movies/' + movie.image" />
-        </div>
-        <div class="year">
-          <h2>{{ movie.year }}</h2>
-          <button @click="addToTheatre(movie)">Watch Movie</button>
+        <div class="name">
+          <h3>{{ movie.name }}</h3>
+          <button @click="addToTheatre(movie)">Add to Review List</button>
         </div>
       </div>
     </div>
@@ -27,6 +27,9 @@ export default {
   },
   methods: {
     addToTheatre(movie) {
+      if (this.$root.$data.theatre.includes(movie)) {
+        return;
+      }
       this.$root.$data.theatre.push(movie);
     },
   },
@@ -38,6 +41,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: "Lucida Console", "Courier New", monospace;
 }
 
 .movies {
@@ -55,6 +59,7 @@ export default {
 
 .movie img {
   border: 2px solid #333;
+  border-radius: 5px;
   height: 250px;
   width: 200px;
   object-fit: cover;
@@ -63,38 +68,40 @@ export default {
 .movie .image {
   display: flex;
   justify-content: center;
-  margin-bottom: 5px;
+  margin-bottom: 7px;
 }
 
 .info {
-  background: #f2921d;
-  color: #000;
+  background: #8b0000;
+  border-radius: 5px;
+  color: rgb(255, 255, 255);
   padding: 10px 30px;
-  height: 80px;
+  height: 110px;
 }
 
 .info h1 {
   font-size: 16px;
+  background: #8b0000;
 }
 
 .info h2 {
   font-size: 14px;
+  background: #8b0000;
 }
 
 .info p {
   margin: 0px;
   font-size: 10px;
-}
-
-.genre {
-  display: flex;
+  background: #8b0000;
 }
 
 button {
   height: 50px;
-  background: #000;
+  background: #8b0000;
+  border-radius: 5px;
   color: white;
   border: none;
+  font-family: "Lucida Console", "Courier New", monospace;
 }
 
 .auto {
